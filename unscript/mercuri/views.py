@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from mercuri.models import Patient as Patient
+from mercuri.models import Doctor as Doctor
 # Create your views here.
 class addPatient(View):
     
@@ -37,3 +38,50 @@ class addPatient(View):
             err = {'error_message': "Some Error Occurred. Please Try Again"}
         
         return render(request, template_name, err)
+
+class addDoctor(View):
+
+    def get(self, request, template_name='addDoctor.html'):
+        return render(request, template_name)
+
+    def post(self, request, template_name='addDoctor.html'):
+        fName = request.POST.get('fName')
+        lName = request.POST.get('lName')
+        fullName = fName + " " + lName
+        email = request.POST.get('email')
+        title = request.POST.get('title')
+        shift = request.POST.get('shift')
+        age = request.POST.get('age')
+        address = request.POST.get('address')
+        contactNo = request.POST.get('contactNo')
+        doctorID = request.POST.get('doctorID')
+        password = request.POST.get('password')
+        confPassword = request.POST.get('conf_password')
+        if password != confPassword:
+            err = {'error_message': "Passwords don't match. Please Try Again."}
+            return render(request, 'addDoctor.html', err)
+
+        try:
+            user = User.objects.create_user(email, email, password, first_name=fname,
+                                                last_name=lname)
+            user.save()
+        except:
+            err = {}
+            err['error_message'] = "Account with this Email already Exists."
+            return render(request, template_name, err)
+        
+        try:
+            docData = Doctor(fName=fName, lName=lName, fullName=fullName, email=email, title=title, shift=shift, age=age, address=address, contactNo=contactNo, doctorID=doctorID)
+            docData.save()
+        except:
+            err = {}
+            err['error_message'] = "Doctor with this ID already Exists."
+            return render(request, template_name, err)
+
+        my_group = Group.objects.get(name='doctor')
+        my_group.user_set.add(user)
+
+        err = {}
+        err['error_message'] = "Doctor Added Successfully."
+        return render(request, template_name, err)
+
