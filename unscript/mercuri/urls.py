@@ -6,5 +6,5 @@ from django.conf.urls.static import static
 app_name='mercuri'
 
 urlpatterns = [
-    path('', views.studentformView.as_view(), name="studentregister"),
+    path('addPatient', views.addPatient.as_view(), name="addPatient"),
 ]
