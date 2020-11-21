@@ -22,20 +22,17 @@
                       {% if msg %}
                         <span class="text-danger">{{ msg }}</span>
 
-                        
-
                       {% endif %}  
                   </h6>
                 </div>
-
                 <div class="card-body">
 
                     <div class="row">
 
                       <div class="col-md-3 px-md-1">
                         <div class="form-group">
-                          <label>Username</label>
-                          {{ form.username }}
+                          <label for="username">Username</label><br>
+                          <input type="text" name="username" id="username">
                         </div>
                       </div>
 
@@ -44,26 +41,21 @@
 
                       <div class="col-md-3 px-md-1">
                         <div class="form-group">
-                          <label>Password</label>
-                          {{ form.password }}
+                          <label for="password">Password</label><br>
+                          <input type="password" name="password" id="password">
                         </div>
                       </div>
-
                     </div>
-                    
                 </div>
                 <div class="card-footer">
                   <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
                   &nbsp; &nbsp;
-                  
                 </div>
-
               </form>
 
             </div>
           </div>
       </div>
-
 
 {% endblock content %}
 
