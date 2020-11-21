@@ -66,6 +66,7 @@ class HospitalAdmin(models.Model):
 class HospitalStaff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fName = models.CharField(default = 'Mukesh', max_length=30)
+    title = models.CharField(default = 'Nurse', max_length=60)
     lName = models.CharField(default = 'Ambani', max_length=30)
     fullName = models.CharField(default = 'Mukesh Ambani', max_length=60)
     staffID = models.CharField(default = 'A1A1A1', max_length=12)
