@@ -32,8 +32,7 @@ class Doctor(models.Model):
     email = models.CharField(default = 'patient@patient.com', max_length=50)
     address = models.CharField(default = 'Antilla, Mumbai', max_length=500)
     doctorID = models.CharField(default = 'A1A1A1', max_length=12)
-    shift = models.CharField(default = 'Morning', max_length=10)
-    photo = models.URLField()
+    shift = models.CharField(default = 'Morning', max_length=20)
     def __str__(self):
         return self.fName + self.lName
 
@@ -57,7 +56,6 @@ class HospitalStaff(models.Model):
     email = models.CharField(default = 'patient@patient.com', max_length=50)
     address = models.CharField(default = 'Antilla, Mumbai', max_length=500)
     shift = models.CharField(default = 'Morning', max_length=10)
-    photo = models.URLField()
     def __str__(self):
         return self.fName + self.lName
 
@@ -76,7 +74,6 @@ class Reception(models.Model):
     email = models.CharField(default = 'patient@patient.com', max_length=50)
     address = models.CharField(default = 'Antilla, Mumbai', max_length=500)
     shift = models.CharField(default = 'Morning', max_length=10)
-    photo = models.URLField()
     def __str__(self):
         return self.fName + self.lName
 

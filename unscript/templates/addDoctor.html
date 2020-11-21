@@ -1,0 +1,123 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="title">Doctor Registration</h4>
+      </div>
+      <br><p>{{error_message}}<br>
+      <div class="card-body">
+        <form role="form" method="post" action="">
+            {% csrf_token %} 
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="fName">First Name:</label>
+                <input type="text" name="fName" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="lName">Last Name:</label>
+                <input type="text" name="lName" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" class="form-control" required>
+              </div>
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" name="address" class="form-control" placeholder="Home Address" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="title">Title: </label>
+                <input type="text" class="form-control" name="title" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="contactNo"> Contact Number: </label>    
+                  <input type="text" name="contactNo" class="form-control" size="10" required>
+              </div>
+            </div> 
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="doctorID">Doctor ID: </label>
+                <input type="text" class="form-control" name="doctorID" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1" class="form-control">
+              <div class="form-group">
+                <label for="shift"> Shift: </label>   
+                
+                <select name="shift" class="form-control">
+                    <option value="Morning" style="background-color: #1d253b">Morning</option>
+                    <option value="Afternoon" style="background-color: #1d253b">Afternoon</option>
+                    <option value="Night" style="background-color: #1d253b">Night</option>
+                </select>
+              </div>
+            </div> 
+          </div>
+
+         <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="password">Password: </label>
+                <input type="password" class="form-control" name="password" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="confPassword"> Confirm Password: </label>    
+                  <input type="password" name="confPassword" class="form-control" required>
+              </div>
+            </div> 
+          </div>
+            
+
+          <div class="card-footer">
+              <button type="submit" class="btn btn-fill btn-primary">Add Doctor</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
