@@ -42,8 +42,6 @@ class HospitalData(models.Model):
     contactNo = models.CharField(default = '0000000000', max_length=15)
     ventilators = models.CharField(default = '000000', max_length=5)
     beds = models.CharField(default = '000000', max_length=6)
-    occupiedVentilators = models.CharField(default = '000000', max_length=5)
-    occupiedBeds = models.CharField(default = '000000', max_length=6)
     availableOxygenCylinders = models.CharField(default = '000000', max_length=6)
 
 class HospitalStaff(models.Model):

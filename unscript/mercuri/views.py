@@ -257,5 +257,78 @@ class InstanceStatus(View):
 
         return render(request, template_name, err)
         
-        
+class Dashboard(View):
 
+    def get(self, request, template_name='index.html'):
+        #get all 3 values from instances
+        allInsts = Stato.objects.filter()
+        try:
+            allInsts = Stato.objects.filter()
+            allInsts = len(allInsts)
+        except:
+            allInsts = 0
+
+        if allInsts < 11:
+            if allInsts == 0:
+                allInsts = []
+            for i in range(11 - len(allInsts)):
+                obj = {}
+                obj["currentActive"] = 0
+                obj["currentDeceased"] = 0
+                obj["currentRecovered"] = 0
+                allInsts.insert(0, obj)
+        
+        allInsts = allInsts[-11:]
+        act = ""
+        dec = ""
+        rec = ""
+        for i in allInsts:
+            act += str(i.currentActive)
+            act += " "
+            dec += str(i.currentDeceased)
+            dec += " "
+            rec += str(i.currentRecovered)
+            rec += " "
+        rec = rec.lstrip()
+        rec = rec.rstrip()
+        act = act.lstrip()
+        act = act.rstrip()
+        dec = dec.lstrip()
+        dec = dec.rstrip()
+        args = {}
+        args["act"] = act
+        args["dec"] = dec
+        args["rec"] = rec
+
+        #get occupied beds and occupied ventilators
+        try:
+            occupiedBeds = Patient.objects.filter(currentStatus="Active")
+            occupiedBeds = len(occupiedBeds)
+        except:
+            occupiedBeds = 0
+
+        try:
+            occupiedVentilators = Patient.objects.filter(ventilator=True)
+            occupiedVentilators = len(occupiedVentilators)
+        except:
+            occupiedVentilators = 0
+
+        #get total beds and occupied beds
+        try:
+            totalBeds = HospitalDat.objects.filter()
+            totalBeds = totalBeds[0].beds
+        except:
+            totalBeds = 100
+        args["totalBeds"] = totalBeds
+
+        try:
+            totalVentilators = HospitalDat.objects.filter()
+            totalVentilators = totalVentilators[0].ventilators
+        except:
+            totalVentilators = 100
+        args["totalVentilators"] = totalVentilators
+
+        args["availBeds"] = totalBeds - occupiedBeds
+        args["availVentilators"] = totalVentilators - occupiedVentilators
+        
+        return render(request, template_name, args)
