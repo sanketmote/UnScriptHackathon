@@ -45,7 +45,7 @@ class HospitalData(models.Model):
     beds = models.CharField(default = '000000', max_length=6)
     occupiedVentilators = models.CharField(default = '000000', max_length=5)
     occupiedBeds = models.CharField(default = '000000', max_length=6)
-    avilableOxygenCylinders = models.CharField(default = '000000', max_length=6)
+    availableOxygenCylinders = models.CharField(default = '000000', max_length=6)
 
 class HospitalStaff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

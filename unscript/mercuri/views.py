@@ -25,13 +25,14 @@ class addPatient(View):
         fName = request.POST.get('fName')
         lName = request.POST.get('lName')
         email = request.POST.get('email')
+        email = str(email)
         age = request.POST.get('age')
         age = str(age)
         address = request.POST.get('address')
-        currentStatus = request.POST.get('currentStatus')
+        currentStatus = "Active"
         remarks = request.POST.get('remarks')
         medicalHistory = request.POST.get('medicalHistory')
-        ventilator = True
+        ventilator = False
         contactNo = request.POST.get('contactNo')
         patientID = request.POST.get('patientID')
         isAlive = True
