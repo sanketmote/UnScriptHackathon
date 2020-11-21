@@ -1,0 +1,115 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Register {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+
+              <form role="form" method="post" action="">
+              
+                {% csrf_token %} 
+
+                <div class="card-header">
+                  <h5 class="title">Add Hospital</h5>
+
+                  <h6 class="card-category">
+                      {% if errorMessage %}
+                        <span class="text-danger">{{ errorMessage }}</span>
+                      {% endif %}  
+                  </h6>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                      <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          <input type="text" name="name" id="name">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                          <label for="address">Address</label>
+                          <input type="text" name="address" id="address">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                          <label for="contactNo">Contact No</label>
+                          <input type="text" name="contactNo" id="contactNo">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 px-md-1">
+                            <div class="form-group">
+                            <label for="ventilators">Ventilators</label>
+                            <input type="text" name="ventilators" id="ventilators">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3 px-md-1">
+                          <div class="form-group">
+                          <label for="beds">Beds</label>
+                          <input type="text" name="beds" id="beds">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                        <label for="occupiedVentilators">Occupied Ventilators</label>
+                        <input type="text" name="occupiedVentilators" id="occupiedVentilators">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 px-md-1">
+                      <div class="form-group">
+                      <label for="occupiedBeds">Occupied Beds</label>
+                      <input type="text" name="occupiedBeds" id="occupiedBeds">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3 px-md-1">
+                    <div class="form-group">
+                    <label for="availableOxygenCylinders">Available Oxygen Cylinders</label>
+                    <input type="text" name="availableOxygenCylinders" id="availableOxygenCylinders">
+                    </div>
+                </div>
+            </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-fill btn-primary">Add Hospital</button>
+                  &nbsp; &nbsp;
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+      </div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

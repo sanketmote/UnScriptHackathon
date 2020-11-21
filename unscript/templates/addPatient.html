@@ -1,0 +1,136 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Patient Registration</h5>
+      </div>
+      <br><p>{{error_message}}<br>
+      <div class="card-body">
+        <form role="form" method="post" action="">
+            {% csrf_token %} 
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="fName">First Name</label>
+                <input type="text" name="fName" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="lName">Last Name</label>
+                <input type="text" name="lName" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+                <label for="email">Email: </label>  
+                <input type="text" class="form-control" placeholder="example@gmail.com" name="email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" placeholder="Home Address" required name="address">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pr-md-1">
+              <div class="form-group">
+                <label for="age">Age: </label>
+                <input type="Number" class="form-control" name="age" required>
+              </div>
+            </div>
+            <div class="col-md-4 px-md-1">
+              <div class="form-group">
+                <label for="remarks">Report: </label>
+                <input type="text" class="form-control" name="remarks" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+                <label for="medicalHistory">Medical History: </label>
+                <input type="text" name="medicalHistory" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+                <label for="contactNo"> Contact Number: </label>    
+                  <input type="text" name="contactNo" class="form-control" size="10" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+                <label for="patientID">Patient ID: </label>
+                <input type="text" class="form-control" name="patientID" required>
+              </div>
+            </div>
+            <div class="col-md-4 pl-md-1">
+              <div class="form-group">
+               <label for="operatedByDoctor">Operated By Doctor: </label>
+                <input type="text" class="form-control" name="operatedByDoctor" required>
+              </div>
+            </div>
+          </div>
+            <div class="card-footer">
+        <button type="submit" class="btn btn-fill btn-primary">Add Patient</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="card-body">
+        <p class="card-text">
+          <div class="author">
+            <div class="block block-one"></div>
+            <div class="block block-two"></div>
+            <div class="block block-three"></div>
+            <div class="block block-four"></div>
+            <a href="javascript:void(0)">
+              <img class="avatar" src="/static/assets/img/emilyz.jpg" alt="...">
+              <h5 class="title">
+                {{ request.user.username }}
+              </h5>
+            </a>
+            <p class="description">
+              {{ request.user.email }}
+            </p>
+          </div>
+        </p>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
