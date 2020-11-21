@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <br><p>{{errorMessage}}</p><br>
+  <form role="form" method="post" action="">
+    {% csrf_token %} 
+    <button type="submit" class="btn btn-fill btn-primary">Create Instance</button>
+  </form> 
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

@@ -12,6 +12,7 @@ from mercuri.models import Doctor as Doctor
 from mercuri.models import HospitalStaff as Staff
 from mercuri.models import Reception as Reception
 from mercuri.models import HospitalData as HospitalDat
+from mercuri.models import StatusForChart as Stato
 from django.core.files.storage import FileSystemStorage
 import shortuuid
 
@@ -200,24 +201,61 @@ class ModifyPatient(View):
 
 class addHospital(View):
 
-        def get(self, request, template_name='hospital.html'):
-            return render(request, template_name)
+    def get(self, request, template_name='hospital.html'):
+        return render(request, template_name)
 
-        def post(self, request, template_name='hospital.html'):
-            name = request.POST.get('name')
-            address = request.POST.get('address')
-            contactNo = request.POST.get('contactNo')
-            ventilators = request.POST.get('ventilators')
-            beds = request.POST.get('beds')
-            occupiedVentilators = request.POST.get('occupiedVentilators')
-            occupiedBeds = request.POST.get('occupiedBeds')
-            availableOxygenCylinders = request.POST.get('availableOxygenCylinders')
-            err = {}
-            try:
-                addHospital2 = HospitalDat(name=name, address=address, contactNo=contactNo, ventilators=ventilators, beds=beds, occupiedBeds=occupiedBeds, occupiedVentilators=occupiedVentilators, availableOxygenCylinders=availableOxygenCylinders)
-                addHospital2.save()
-                err["errorMessage"] = "Hospital Added Successfully"
-            except:
-                err["errorMessage"] = "Some Error Occurred. Please Try Again"
+    def post(self, request, template_name='hospital.html'):
+        name = request.POST.get('name')
+        address = request.POST.get('address')
+        contactNo = request.POST.get('contactNo')
+        ventilators = request.POST.get('ventilators')
+        beds = request.POST.get('beds')
+        occupiedVentilators = request.POST.get('occupiedVentilators')
+        occupiedBeds = request.POST.get('occupiedBeds')
+        availableOxygenCylinders = request.POST.get('availableOxygenCylinders')
+        err = {}
+        try:
+            addHospital2 = HospitalDat(name=name, address=address, contactNo=contactNo, ventilators=ventilators, beds=beds, occupiedBeds=occupiedBeds, occupiedVentilators=occupiedVentilators, availableOxygenCylinders=availableOxygenCylinders)
+            addHospital2.save()
+            err["errorMessage"] = "Hospital Added Successfully"
+        except:
+            err["errorMessage"] = "Some Error Occurred. Please Try Again"
 
-            return render(request, template_name, err)
+        return render(request, template_name, err)
+
+class InstanceStatus(View):
+    def get(self, request, template_name='makeInstance.html'):
+        return render(request, template_name)
+    
+    def post(self, request, template_name='makeInstance.html'):
+        try:
+            currentActive = Patient.objects.filter(currentStatus='Active')
+            currentActive = len(currentActive)
+        except:
+            currentActive = 0
+
+        try:
+            currentDeceased = Patient.objects.filter(currentStatus='Dead')
+            currentDeceased = len(currentDeceased)
+        except:
+            currentDeceased = 0
+
+        try:
+            currentRecovered = Patient.objects.filter(currentStatus='Recovered')
+            currentRecovered = len(currentRecovered)
+        except:
+            currentRecovered = 0
+
+        err = {}
+
+        try:
+            addInst = Stato(currentActive=currentActive, currentDeceased=currentDeceased, currentRecovered=currentRecovered)
+            addInst.save()
+            err["errorMessage"] = "Instance Created Successfully."
+        except:
+            err["errorMessage"] = "Some Error Occurred. Please Try Again."
+
+        return render(request, template_name, err)
+        
+        
+
