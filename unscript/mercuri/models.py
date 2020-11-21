@@ -3,7 +3,7 @@ from django.utils import timezone
 import datetime
 from django.core.validators import MaxValueValidator
 from django.contrib.auth.models import User
-User._meta.get_field('email')._unique = True
+#User._meta.get_field('email')._unique = True
 # Create your models here.
 
 class Patient(models.Model):
@@ -15,8 +15,8 @@ class Patient(models.Model):
     address = models.CharField(default = 'Antilla, Mumbai', max_length=500)
     currentStatus = models.CharField(default = 'Active', max_length=10)
     remarks = models.CharField(default = 'Recovering Steadily', max_length=1200)
-	medicalHistory = models.CharField(default = 'Diabetic', max_length=1200)
-	ventilator = models.BooleanField()
+    medicalHistory = models.CharField(default = 'Diabetic', max_length=1200)
+    ventilator = models.BooleanField()
     contactNo = models.CharField(default = '0000000000', max_length=15)
     patientID = models.CharField(default = 'A1A1A1', max_length=12)
     isAlive = models.BooleanField()
