@@ -260,25 +260,12 @@ class InstanceStatus(View):
 class Dashboard(View):
 
     def get(self, request, template_name='index.html'):
-        #get all 3 values from instances
         allInsts = Stato.objects.filter()
         try:
             allInsts = Stato.objects.filter()
-            allInsts = len(allInsts)
         except:
-            allInsts = 0
+            allInsts = {}
 
-        if allInsts < 11:
-            if allInsts == 0:
-                allInsts = []
-            for i in range(11 - len(allInsts)):
-                obj = {}
-                obj["currentActive"] = 0
-                obj["currentDeceased"] = 0
-                obj["currentRecovered"] = 0
-                allInsts.insert(0, obj)
-        
-        allInsts = allInsts[-11:]
         act = ""
         dec = ""
         rec = ""

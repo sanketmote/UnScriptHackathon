@@ -1,0 +1,117 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Page User {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="title">Modify Patient</h4>
+      </div>
+      <br><p>{{error_message}}<br>
+      <div class="card-body">
+        <form role="form" method="post" action="">
+            {% csrf_token %} 
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="fName">First Name:</label>
+                <input type="text" name="fName" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="lName">Last Name:</label>
+                <input type="text" name="lName" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" class="form-control" required>
+              </div>
+            </div>
+          </div>
+        
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" name="address" class="form-control" placeholder="Home Address" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="age">Age: </label>
+                <input type="text" class="form-control" name="age" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="contactNo"> Contact Number: </label>    
+                  <input type="text" name="contactNo" class="form-control" size="10" required>
+              </div>
+            </div> 
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="patientID">Patient ID: </label>
+                <input type="text" class="form-control" name="patientID" required>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="operatedByDoctor"> Operated By Doctor: </label>    
+                  <input type="text" name="operatedByDoctor"class="form-control" required>
+              </div>
+            </div> 
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 pr-md-1">
+              <div class="form-group">
+                <label for="remarks">Report: </label>
+                <textarea rows="4" cols="100"class="form-control" name="remarks" required></textarea>
+              </div>
+            </div>
+            <div class="col-md-6 pl-md-1">
+              <div class="form-group">
+                <label for="medicalHistory"> Medical History: </label>    
+                <textarea rows="4" cols="100"class="form-control" name="medicalHistory" required></textarea>
+              </div>
+            </div> 
+          </div>
+
+          <div class="card-footer">
+              <button type="submit" class="btn btn-fill btn-primary">Add Patient</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

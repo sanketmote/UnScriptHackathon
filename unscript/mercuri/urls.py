@@ -13,5 +13,5 @@ urlpatterns = [
     path('ModifyPatient', views.ModifyPatient.as_view(), name="ModifyPatient"),
     path('addHospital', views.addHospital.as_view(), name="addHospital"),
     path('InstanceStatus', views.InstanceStatus.as_view(), name="InstanceStatus"),
-
+    path('Dashboard', views.Dashboard.as_view(), name="Dashboard"),
 ]
