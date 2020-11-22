@@ -125,41 +125,62 @@ demo = {
     perBed = parseInt(perBed);
 
     var act = document.getElementById('act').textContent;
-    act = act.split();
+    act = act.split(" ");
 
     var rec = document.getElementById('rec').textContent;
-    rec = rec.split();
+    rec = rec.split(" ");
 
     var dec = document.getElementById('dec').textContent;
-    dec = dec.split();
-
-    act.reverse();
-    rec.reverse();
-    dec.reverse();
+    dec = dec.split(" ");
 
     for(var i=0; i<11; i++)
     {
-      act.push("0");
-      rec.push("0");
-      dec.push("0");
+      act.unshift("0");
+      rec.unshift("0");
+      dec.unshift("0");
     }
 
     act.reverse();
     rec.reverse();
     dec.reverse();
 
-    act.slice(Math.max(act.length - 10, 0))
-    rec.slice(Math.max(rec.length - 11, 0))
-    rec2 = []
-    for(var i=0; i<rec.length - 1; i++)
+    act = act.slice(0, 10);
+    act.reverse();
+
+    rec = rec.slice(0, 11);
+
+    dec = dec.slice(0, 11);
+
+    let rec2 = [];
+    let dec2 = [];
+    for(var i=0; i<11; i++)
     {
-      rec2.push((Number(rec[i+1]) - Number(rec[i])).toString())
+      rec2.unshift(Number(rec[i]));
+      dec2.unshift(Number(dec[i]));
     }
-    dec.slice(Math.max(dec.length - 11, 0))
-    dec2 = []
-    for(var i=0; i<dec.length - 1; i++)
+
+    let rec3 = [];
+    let dec3 = [];
+
+    for(let i=0; i<10; i++)
     {
-      dec2.push((Number(dec[i+1]) - Number(dec[i])).toString())
+      rec3.unshift(rec2[i+1]-rec2[i]);
+      dec3.unshift(dec2[i+1]-dec2[i]);
+    }
+
+    rec3.reverse();
+    dec3.reverse();
+
+    console.log(rec3);
+    console.log(dec3);
+
+    rec4 = [];
+    dec4 = [];
+
+    for(let i=0; i<10; i++)
+    {
+      rec4.push(rec3[i].toString());
+      dec4.push(dec3[i].toString());
     }
 
 
@@ -189,9 +210,9 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 125,
-            padding: 20,
+            //suggestedMin: 60,
+            //suggestedMax: 125,
+            //padding: 20,
             fontColor: "#2380f7"
           }
         }],
@@ -342,9 +363,9 @@ demo = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 60,
-            suggestedMax: 120,
-            padding: 20,
+            //suggestedMin: 60,
+            //suggestedMax: 120,
+            //padding: 20,
             fontColor: "#9e9e9e"
           }
         }],
@@ -456,7 +477,7 @@ demo = {
       data: {
         labels: chart_labels,
         datasets: [{
-          label: "My First dataset",
+          label: "COVID Statistics",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: '#d346b1',
@@ -485,7 +506,7 @@ demo = {
       myChartData.update();
     });
     $("#1").click(function() {
-      var chart_data = rec2;
+      var chart_data = rec4;
       
       var data = myChartData.config.data;
       data.datasets[0].data = chart_data;
@@ -494,7 +515,7 @@ demo = {
     });
 
     $("#2").click(function() {
-      var chart_data = dec2;
+      var chart_data = dec4;
       
       var data = myChartData.config.data;
       data.datasets[0].data = chart_data;
