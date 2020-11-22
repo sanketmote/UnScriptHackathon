@@ -186,22 +186,17 @@ class modifyPatient(View):
         return render(request, template_name, args)
 
     def post(self, request, mail, template_name='modifyPatient.html'):
-        fName = request.POST.get('fName')
-        lName = request.POST.get('lName')
-        email = request.POST.get('email')
-        age = request.POST.get('age')
-        address = request.POST.get('address')
         currentStatus = request.POST.get('currentStatus')
         remarks = request.POST.get('remarks')
-        medicalHistory = request.POST.get('medicalHistory')
         ventilator = request.POST.get('ventilator')
-        contactNo = request.POST.get('contactNo')
-        patientID = request.POST.get('patientID')
-        isAlive = request.POST.get('isAlive')
+        if ventilator == "No":
+            ventilator = False
+        else:
+            ventilator = True
         operatedByDoctor = request.POST.get('operatedByDoctor')
+        Patient.objects.filter(email=mail).update(currentStatus=currentStatus, remarks=remarks, ventilator=ventilator, operatedByDoctor=operatedByDoctor)
+        return render(request, template_name, {"errorMessage": "Changes Done Successfully"})
 
-        Patient.objects.filter(fName=fName, lName=lName, email=email, age=age, address=address, contactNo=contactNo, medicalHistory=medicalHistory).update(currentStatus=currentStatus, remarks=remarks, ventilator=ventilator, contactNo=contactNo, patientID=patientID, isAlive=isAlive, operatedByDoctor=operatedByDoctor)
-        return render(request, template_name, {"err": "Changes Done Successfully"})
 
 class addHospital(View):
 
