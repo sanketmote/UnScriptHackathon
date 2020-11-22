@@ -22,6 +22,7 @@
                 <th scope="col">Status</th>
                 <th scope="col">ID</th>
                 <th scope="col">Operated By</th>
+                <th scope="col">Email</th>
               </tr>
             </thead>
             <tbody>
@@ -34,11 +35,10 @@
                 <td><span style="color: #ff4141;">{{i.currentStatus}}</span></td>
                 {% elif i.currentStatus == 'Recovered' %}
                 <td><span style="color: #07ce00;">{{i.currentStatus}}</span></td>
-                {% elif i.currentStatus == 'Critical' %}
-                <td><span style="color: #d36464;">{{i.currentStatus}}</span></td>
                 {% endif %}
                 <td>{{i.patientID}}</td>
                 <td>{{i.operatedByDoctor}}</td>
+                <td>{{i.email}}</td>
               </tr></a>
               {% endfor %}
             </tbody>

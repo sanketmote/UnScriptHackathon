@@ -13,7 +13,7 @@
       <div class="card-header">
         <h4 class="title">Modify Patient</h4>
       </div>
-      <br><p>{{error_message}}<br>
+      <br><p>{{errorMessage}}<br>
       <div class="card-body">
         <form role="form" method="post" action="">
             {% csrf_token %} 
@@ -85,13 +85,13 @@
             <div class="col-md-6 pr-md-1">
               <div class="form-group">
                 <label for="remarks">Report: </label>
-                <input type="text" class="form-control" name="remarks" required value="{{pat.remarks}}">
+                <input type="text"class="form-control" name="remarks" required value="{{pat.remarks}}">
               </div>
             </div>
             <div class="col-md-6 pl-md-1">
               <div class="form-group">
                 <label for="medicalHistory"> Medical History: </label>    
-                <input type="text"class="form-control" name="medicalHistory" value="{{pat.medicalHistory}}">
+                <input type="text" class="form-control" name="medicalHistory" value="{{pat.medicalHistory}}" disabled>
               </div>
             </div> 
           </div>
@@ -99,7 +99,6 @@
             <div  class="col-md-6 pr-md-1">
                 <select name="currentStatus" class="form-control" required>
                   <option value="Active" style="background-color: #1d253b">Active</option>
-                  <option value="Critical" style="background-color: #1d253b">Critical</option>
                   <option value="Dead" style="background-color: #1d253b">Dead</option>
                   <option value="Recovered" style="background-color: #1d253b">Recovered</option>
                 </select>

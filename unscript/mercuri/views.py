@@ -255,69 +255,58 @@ class InstanceStatus(View):
         return render(request, template_name, err)
         
 class Dashboard(View):
-
-    # def get(self, request, template_name='index.html'):
-    #     allInsts = Stato.objects.filter()
-    #     try:
-    #         allInsts = Stato.objects.filter()
-    #     except:
-    #         allInsts = {}
-
-    #     act = ""
-    #     dec = ""
-    #     rec = ""
-    #     for i in allInsts:
-    #         act += str(i.currentActive)
-    #         act += " "
-    #         dec += str(i.currentDeceased)
-    #         dec += " "
-    #         rec += str(i.currentRecovered)
-    #         rec += " "
-    #     rec = rec.lstrip()
-    #     rec = rec.rstrip()
-    #     act = act.lstrip()
-    #     act = act.rstrip()
-    #     dec = dec.lstrip()
-    #     dec = dec.rstrip()
-    #     args = {}
-    #     args["act"] = act
-    #     args["dec"] = dec
-    #     args["rec"] = rec
-
-    #     #get occupied beds and occupied ventilators
-    #     try:
-    #         occupiedBeds = Patient.objects.filter(currentStatus="Active")
-    #         occupiedBeds = len(occupiedBeds)
-    #     except:
-    #         occupiedBeds = 0
-
-    #     try:
-    #         occupiedVentilators = Patient.objects.filter(ventilator=True)
-    #         occupiedVentilators = len(occupiedVentilators)
-    #     except:
-    #         occupiedVentilators = 0
-
-    #     #get total beds and occupied beds
-    #     try:
-    #         totalBeds = HospitalDat.objects.filter()
-    #         totalBeds = totalBeds[0].beds
-    #     except:
-    #         totalBeds = 100
-    #     args["totalBeds"] = totalBeds
-
-    #     try:
-    #         totalVentilators = HospitalDat.objects.filter()
-    #         totalVentilators = totalVentilators[0].ventilators
-    #     except:
-    #         totalVentilators = 100
-    #     args["totalVentilators"] = totalVentilators
-
-    #     args["availBeds"] = totalBeds - occupiedBeds
-    #     args["availVentilators"] = totalVentilators - occupiedVentilators
-        
-    #     return render(request, template_name, args)
     def get(self, request, template_name='index.html'):
-        return render(request, template_name)
+        allInsts = Stato.objects.filter()
+        if allInsts == None:
+            allInsts = {}
+        act = ""
+        rec = ""
+        dec = ""
+        for i in allInsts:
+            act += i.currentActive
+            act += " "
+            rec += i.currentRecovered
+            rec += " "
+            dec += i.currentDeceased
+            dec += " "
+        rec = rec.lstrip()
+        rec = rec.rstrip()
+        dec = dec.lstrip()
+        dec = dec.rstrip()
+        act = act.lstrip()
+        act = act.rstrip()
+        
+        args = {}
+        args["rec"] = rec
+        args["act"] = act
+        args["dec"] = dec
+
+        try:
+            occVents = Patient.objects.filter(ventilator=True)
+            occVents = len(occVents)
+        except:
+            occVents = 0
+
+        try:
+            occBeds = Patient.objects.filter(currentStatus='Active')
+            occBeds = len(occBeds)
+        except:
+            occBeds = 0
+
+        args["occVents"] = occVents
+        args["occBeds"] = occBeds
+
+        hosDat = HospitalDat.objects.filter()
+        hosDat = hosDat[0]
+        totBeds = hosDat.beds
+        totVents = hosDat.ventilators
+        args["totBeds"] = totBeds
+        args["totVents"] = totVents
+
+        args["availBeds"] = int(totBeds) - int(occBeds)
+        args["availVents"] = int(totVents) - int(occVents)
+        
+        return render(request, template_name, args)
 
 
 class listPatients(View):

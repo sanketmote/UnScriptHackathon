@@ -54,10 +54,18 @@
       </div>
     </div>
 
-<p id="activeCases" hidden>{{act}}</p>
-<p id="recovered" hidden>{{rec}}</p>
-<p id="deceased" hidden>{{dec}}</p>
-
+<p id="act" hidden>{{act}}</p>
+<p id="rec" hidden>{{rec}}</p>
+<p id="dec" hidden>{{dec}}</p>
+<p id = "totVents" hidden>{{totVents}}</p>
+<p id = "occVents" hidden>{{occVents}}</p>
+<p id = "availVents" hidden>{{availVents}}</p>
+<p id = "totBeds" hidden>{{totBeds}}</p>
+<p id = "occBeds" hidden>{{occBeds}}</p>
+<p id = "availBeds" hidden>{{availBeds}}</p>
+<p id="active"></p>
+<p id="dece"></p>
+<p id="reco"></p>
 
     <!-- graph 1 end -->
 
@@ -67,8 +75,34 @@
       <div class="col-lg-6">
         <div class="card card-chart">
           <div class="card-header">
-            <h5 class="card-category">Available Beds</h5>
-            <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>{{availBeds}}</h3>
+
+            <div class ="row">
+              <div class="pr-md-2" style="padding-left: 4%;">
+                <h4 class="card-category">Total Beds</h4>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{totBeds}}</h3>
+              </div>
+              <div style="padding-left: 2%;
+                  border-left: 2px solid green;
+                  height: 60px;">
+              </div>
+
+              <div class="pr-md-2" style="padding-left: 2%;">
+                <h4 class="card-category">Occupied Beds</h4>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{occBeds}}</h3>
+              </div>
+              
+              <div style="padding-left: 2%;
+                  border-left: 2px solid green;
+                  height: 60px;">
+              
+               </div>
+              
+              <div class="pr-md-2" style="padding-left: 4%;">
+                <h4 class="card-category">Available Beds</h4>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{availBeds}}</h3>
+              </div> 
+
+            </div>          
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -81,8 +115,30 @@
       <div class="col-lg-6">
         <div class="card card-chart">
           <div class="card-header">
-            <h5 class="card-category">Available Ventilators</h5>
-            <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{availVentilators}}</h3>
+            <div class ="row">
+              <div class="pr-md-2" style="padding-left: 4%;">
+                <h5 class="card-category">Total Ventilators</h5>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{totVents}}</h3>
+              </div>
+
+              <div style="padding-left: 2%;
+                  border-left: 2px solid green;
+                  height: 60px;">
+              </div>
+              
+              <div class="pr-md-2" style="padding-left: 4%;"><h5 class="card-category">Occupied Ventilators</h5>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{occVents}}</h3>
+              </div>
+              
+              <div style="padding-left: 2%;
+                  border-left: 2px solid green;
+                  height: 60px;">
+              </div>
+              
+              <div class="pr-md-2" style="padding-left: 4%;"><h5 class="card-category">Available Ventilators</h5>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success"></i>{{availVents}}</h3>
+              </div>        
+            </div>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -92,6 +148,7 @@
         </div>
       </div>
     </div>
+
 
 <!-- graph 3 end -->
 

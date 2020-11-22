@@ -108,6 +108,61 @@ demo = {
 
   initDashboardPageCharts: function() {
 
+    //lablee = document.getElementById('MereBaap').textContent
+    var totVents = document.getElementById('totVents').textContent;
+    var occVents = document.getElementById('occVents').textContent;
+    var availVents = document.getElementById('availVents').textContent;
+    var totBeds = document.getElementById('totBeds').textContent;
+    var occBeds = document.getElementById('occBeds').textContent;
+    var availBeds = document.getElementById('availBeds').textContent;
+
+    let perVent = Number(availVents)/Number(totVents);
+    perVent *= 100;
+    perVent = parseInt(perVent);
+
+    let perBed = Number(availBeds)/Number(totBeds);
+    perBed *= 100;
+    perBed = parseInt(perBed);
+
+    var act = document.getElementById('act').textContent;
+    act = act.split();
+
+    var rec = document.getElementById('rec').textContent;
+    rec = rec.split();
+
+    var dec = document.getElementById('dec').textContent;
+    dec = dec.split();
+
+    act.reverse();
+    rec.reverse();
+    dec.reverse();
+
+    for(var i=0; i<11; i++)
+    {
+      act.push("0");
+      rec.push("0");
+      dec.push("0");
+    }
+
+    act.reverse();
+    rec.reverse();
+    dec.reverse();
+
+    act.slice(Math.max(act.length - 10, 0))
+    rec.slice(Math.max(rec.length - 11, 0))
+    rec2 = []
+    for(var i=0; i<rec.length - 1; i++)
+    {
+      rec2.push((Number(rec[i+1]) - Number(rec[i])).toString())
+    }
+    dec.slice(Math.max(dec.length - 11, 0))
+    dec2 = []
+    for(var i=0; i<dec.length - 1; i++)
+    {
+      dec2.push((Number(dec[i+1]) - Number(dec[i])).toString())
+    }
+
+
     gradientChartOptionsConfigurationWithTooltipBlue = {
       maintainAspectRatio: false,
       legend: {
@@ -320,7 +375,7 @@ demo = {
     var data = {
       labels: ['Beds in %'],
       datasets: [{
-        label: "Data",
+        label: "Available Beds in %",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#d048b6',
@@ -334,7 +389,7 @@ demo = {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [80],
+        data: [perBed],
       }]
     };
 
@@ -356,7 +411,7 @@ demo = {
     var data = {
       labels: ['Ventilator in %'],
       datasets: [{
-        label: "My First dataset",
+        label: "Available Ventilators in %",
         fill: true,
         backgroundColor: gradientStroke,
         borderColor: '#00d6b4',
@@ -371,7 +426,7 @@ demo = {
 
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [90],
+        data: [perVent],
       }]
     };
 
@@ -385,7 +440,7 @@ demo = {
 
 
     var chart_labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-    var chart_data = ["100", "70", "90", "70", "85", "60", "75", "60", "90", "80"];
+    var chart_data = act;
 
     //var p=chart_labels[6];
 
@@ -430,7 +485,7 @@ demo = {
       myChartData.update();
     });
     $("#1").click(function() {
-      var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 80];
+      var chart_data = rec2;
       
       var data = myChartData.config.data;
       data.datasets[0].data = chart_data;
@@ -439,7 +494,7 @@ demo = {
     });
 
     $("#2").click(function() {
-      var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115];
+      var chart_data = dec2;
       
       var data = myChartData.config.data;
       data.datasets[0].data = chart_data;

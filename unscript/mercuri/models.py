@@ -58,7 +58,6 @@ class HospitalStaff(models.Model):
         return self.fName + self.lName
 
 class StatusForChart(models.Model):
-    currentTime = models.DateTimeField(default=timezone.now)
     currentActive = models.CharField(default = '000000', max_length=6)
     currentDeceased = models.CharField(default = '000000', max_length=6)
     currentRecovered = models.CharField(default = '000000', max_length=6)
