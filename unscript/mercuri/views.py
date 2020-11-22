@@ -43,7 +43,7 @@ class addPatient(View):
             addPat.save()
             err = {'error_message': "Patient Added Successfully."}
         except:
-            err = {'error_message': "Some Error Occurred. Please Try Again"}
+            err = {'error_message': "Patient with given mail/ID already exists. Please Try Again"}
         
         return render(request, template_name, err)
 
@@ -261,66 +261,69 @@ class InstanceStatus(View):
         
 class Dashboard(View):
 
-    def get(self, request, template_name='index.html'):
-        allInsts = Stato.objects.filter()
-        try:
-            allInsts = Stato.objects.filter()
-        except:
-            allInsts = {}
+    # def get(self, request, template_name='index.html'):
+    #     allInsts = Stato.objects.filter()
+    #     try:
+    #         allInsts = Stato.objects.filter()
+    #     except:
+    #         allInsts = {}
 
-        act = ""
-        dec = ""
-        rec = ""
-        for i in allInsts:
-            act += str(i.currentActive)
-            act += " "
-            dec += str(i.currentDeceased)
-            dec += " "
-            rec += str(i.currentRecovered)
-            rec += " "
-        rec = rec.lstrip()
-        rec = rec.rstrip()
-        act = act.lstrip()
-        act = act.rstrip()
-        dec = dec.lstrip()
-        dec = dec.rstrip()
-        args = {}
-        args["act"] = act
-        args["dec"] = dec
-        args["rec"] = rec
+    #     act = ""
+    #     dec = ""
+    #     rec = ""
+    #     for i in allInsts:
+    #         act += str(i.currentActive)
+    #         act += " "
+    #         dec += str(i.currentDeceased)
+    #         dec += " "
+    #         rec += str(i.currentRecovered)
+    #         rec += " "
+    #     rec = rec.lstrip()
+    #     rec = rec.rstrip()
+    #     act = act.lstrip()
+    #     act = act.rstrip()
+    #     dec = dec.lstrip()
+    #     dec = dec.rstrip()
+    #     args = {}
+    #     args["act"] = act
+    #     args["dec"] = dec
+    #     args["rec"] = rec
 
-        #get occupied beds and occupied ventilators
-        try:
-            occupiedBeds = Patient.objects.filter(currentStatus="Active")
-            occupiedBeds = len(occupiedBeds)
-        except:
-            occupiedBeds = 0
+    #     #get occupied beds and occupied ventilators
+    #     try:
+    #         occupiedBeds = Patient.objects.filter(currentStatus="Active")
+    #         occupiedBeds = len(occupiedBeds)
+    #     except:
+    #         occupiedBeds = 0
 
-        try:
-            occupiedVentilators = Patient.objects.filter(ventilator=True)
-            occupiedVentilators = len(occupiedVentilators)
-        except:
-            occupiedVentilators = 0
+    #     try:
+    #         occupiedVentilators = Patient.objects.filter(ventilator=True)
+    #         occupiedVentilators = len(occupiedVentilators)
+    #     except:
+    #         occupiedVentilators = 0
 
-        #get total beds and occupied beds
-        try:
-            totalBeds = HospitalDat.objects.filter()
-            totalBeds = totalBeds[0].beds
-        except:
-            totalBeds = 100
-        args["totalBeds"] = totalBeds
+    #     #get total beds and occupied beds
+    #     try:
+    #         totalBeds = HospitalDat.objects.filter()
+    #         totalBeds = totalBeds[0].beds
+    #     except:
+    #         totalBeds = 100
+    #     args["totalBeds"] = totalBeds
 
-        try:
-            totalVentilators = HospitalDat.objects.filter()
-            totalVentilators = totalVentilators[0].ventilators
-        except:
-            totalVentilators = 100
-        args["totalVentilators"] = totalVentilators
+    #     try:
+    #         totalVentilators = HospitalDat.objects.filter()
+    #         totalVentilators = totalVentilators[0].ventilators
+    #     except:
+    #         totalVentilators = 100
+    #     args["totalVentilators"] = totalVentilators
 
-        args["availBeds"] = totalBeds - occupiedBeds
-        args["availVentilators"] = totalVentilators - occupiedVentilators
+    #     args["availBeds"] = totalBeds - occupiedBeds
+    #     args["availVentilators"] = totalVentilators - occupiedVentilators
         
-        return render(request, template_name, args)
+    #     return render(request, template_name, args)
+    def get(self, request, template_name='index.html'):
+        return render(request, template_name)
+
 
 class listPatients(View):
     def get(self, request, template_name='listPatients.html'):
@@ -354,3 +357,34 @@ class modifyHospital(View):
         hos = hos[0]
         err["hos"] = hos
         return render(request, template_name, {"errorMessage": "Changes Done Successfully"})
+
+class searchPatient(View):
+
+    def get(self, request, template_name='searchPatient.html'):
+        return render(request, template_name)
+
+    def post(self, request, template_name='searchPatient.html'):
+        query = request.POST.get('query')
+        choice = request.POST.get('choice')
+        err = {}
+
+        if choice == "ID":
+            try:
+                reqPat = Patient.objects.filter(patientID = query)
+                reqPat = reqPat[0]
+                err["errorMessage"] = "Patient Found"
+                err["i"] = reqPat
+            except:
+                err["errorMessage"] = "Patient Not Found"
+            
+        else:
+
+            try:
+                reqPat = Patient.objects.filter(email = query)
+                reqPat = reqPat[0]
+                err["errorMessage"] = "Patient Found"
+                err["i"] = reqPat
+            except:
+                err["errorMessage"] = "Patient Not Found"
+
+        return render(request, template_name, err)
