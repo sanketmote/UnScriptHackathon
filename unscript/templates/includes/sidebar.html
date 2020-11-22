@@ -39,7 +39,19 @@
           </li>-->
 
           <!-- Only for Admin -->
-          
+          <li>
+            <a href="">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Modify Patient</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'mercuri:modifyHospital' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Update Hospital Data</p>
+            </a>
+          </li>
+
           <li>
             <a href="{% url 'mercuri:addDoctor' %}">
               <i class="tim-icons icon-single-02"></i>
@@ -71,6 +83,18 @@
             <a href="{% url 'mercuri:InstanceStatus' %}">
               <i class="tim-icons icon-puzzle-10"></i>
               <p>Instance Status</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'mercuri:listPatients' %}">
+              <i class="tim-icons icon-puzzle-10"></i>
+              <p>Patients List</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'mercuri:addHospital' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Add Hospital Data</p>
             </a>
           </li>
           

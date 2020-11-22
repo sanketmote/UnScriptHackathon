@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Register {% endblock %} 
+{% block title %} Hospital Data {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -16,7 +16,7 @@
                 {% csrf_token %} 
 
                 <div class="card-header">
-                  <h5 class="title">Add Hospital</h5>
+                  <h5 class="title">Modify Hospital</h5>
 
                   <h6 class="card-category">
                       {% if errorMessage %}
@@ -30,7 +30,7 @@
                       <div class="col-md-3 px-md-1">
                         <div class="form-group">
                           <label for="name">Name</label>
-                          <input type="text" name="name" id="name">
+                          <input type="text" name="name" id="name" value="{{hos.name}}" disabled>
                         </div>
                       </div>
                     </div>
@@ -38,7 +38,7 @@
                       <div class="col-md-3 px-md-1">
                         <div class="form-group">
                           <label for="address">Address</label>
-                          <input type="text" name="address" id="address">
+                          <input type="text" name="address" id="address" value="{{hos.address}}" disabled>
                         </div>
                       </div>
                     </div>
@@ -46,7 +46,7 @@
                       <div class="col-md-3 px-md-1">
                         <div class="form-group">
                           <label for="contactNo">Contact No</label>
-                          <input type="text" name="contactNo" id="contactNo">
+                          <input type="text" name="contactNo" id="contactNo" value="{{hos.contactNo}}" disabled>
                         </div>
                       </div>
                     </div>
@@ -55,7 +55,7 @@
                         <div class="col-md-3 px-md-1">
                             <div class="form-group">
                             <label for="ventilators">Ventilators</label>
-                            <input type="text" name="ventilators" id="ventilators">
+                            <input type="text" name="ventilators" id="ventilators" value="{{hos.ventilators}}">
                             </div>
                         </div>
                     </div>
@@ -64,22 +64,23 @@
                       <div class="col-md-3 px-md-1">
                           <div class="form-group">
                           <label for="beds">Beds</label>
-                          <input type="text" name="beds" id="beds">
+                          <input type="text" name="beds" id="beds" value="{{hos.beds}}">
                           </div>
                       </div>
                   </div>
+
               <div class="row">
                 <div class="col-md-3 px-md-1">
                     <div class="form-group">
                     <label for="availableOxygenCylinders">Available Oxygen Cylinders</label>
-                    <input type="text" name="availableOxygenCylinders" id="availableOxygenCylinders">
+                    <input type="text" name="availableOxygenCylinders" id="availableOxygenCylinders" value="{{hos.availableOxygenCylinders}}">
                     </div>
                 </div>
             </div>
 
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-fill btn-primary">Add Hospital</button>
+                  <button type="submit" class="btn btn-fill btn-primary">Modify Hospital</button>
                   &nbsp; &nbsp;
                 </div>
 

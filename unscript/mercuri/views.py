@@ -177,11 +177,15 @@ class addReception(View):
         err['error_message'] = "Reception Added Successfully."
         return render(request, template_name, err)
 
-class ModifyPatient(View):
-    def get(self, request, template_name='modifyPatient.html'):
-        return render(request, template_name)
+class modifyPatient(View):
+    def get(self, request, mail, template_name='modifyPatient.html'):
+        thatPatient = Patient.objects.filter(email=mail)
+        thatPatient = thatPatient[0]
+        args = {}
+        args["pat"] = thatPatient
+        return render(request, template_name, args)
 
-    def post(self, request, template_name='modifyPatient.html'):
+    def post(self, request, mail, template_name='modifyPatient.html'):
         fName = request.POST.get('fName')
         lName = request.POST.get('lName')
         email = request.POST.get('email')
@@ -210,12 +214,10 @@ class addHospital(View):
         contactNo = request.POST.get('contactNo')
         ventilators = request.POST.get('ventilators')
         beds = request.POST.get('beds')
-        occupiedVentilators = request.POST.get('occupiedVentilators')
-        occupiedBeds = request.POST.get('occupiedBeds')
         availableOxygenCylinders = request.POST.get('availableOxygenCylinders')
         err = {}
         try:
-            addHospital2 = HospitalDat(name=name, address=address, contactNo=contactNo, ventilators=ventilators, beds=beds, occupiedBeds=occupiedBeds, occupiedVentilators=occupiedVentilators, availableOxygenCylinders=availableOxygenCylinders)
+            addHospital2 = HospitalDat(name=name, address=address, contactNo=contactNo, ventilators=ventilators, beds=beds, availableOxygenCylinders=availableOxygenCylinders)
             addHospital2.save()
             err["errorMessage"] = "Hospital Added Successfully"
         except:
@@ -319,3 +321,36 @@ class Dashboard(View):
         args["availVentilators"] = totalVentilators - occupiedVentilators
         
         return render(request, template_name, args)
+
+class listPatients(View):
+    def get(self, request, template_name='listPatients.html'):
+        thatPatient = Patient.objects.filter()
+        args = {}
+        args["pat"] = thatPatient
+        return render(request, template_name, args)
+
+class modifyHospital(View):
+    def get(self, request, template_name='modifyHospital.html'):
+        thatHospital = HospitalDat.objects.filter()
+        thatHospital = thatHospital[0]
+        args = {}
+        args["hos"] = thatHospital
+        return render(request, template_name, args)
+
+    def post(self, request, template_name='modifyHospital.html'):
+        thatHospital = HospitalDat.objects.filter()
+        thatHospital = thatHospital[0]
+        name = thatHospital.name
+        address = thatHospital.address
+        contactNo = thatHospital.contactNo
+        ventilators = request.POST.get('ventilators')
+        beds = request.POST.get('beds')
+        availableOxygenCylinders = request.POST.get('availableOxygenCylinders')
+        err = {}
+        HospitalDat.objects.filter(name=name, address=address, contactNo=contactNo).delete()
+        newHos = HospitalDat(name=name, address=address, contactNo=contactNo, ventilators=ventilators, beds=beds, availableOxygenCylinders=availableOxygenCylinders)
+        newHos.save()
+        hos = HospitalDat.objects.filter(name=name, address=address, contactNo=contactNo)
+        hos = hos[0]
+        err["hos"] = hos
+        return render(request, template_name, {"errorMessage": "Changes Done Successfully"})

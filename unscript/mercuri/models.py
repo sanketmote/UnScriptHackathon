@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Patient(models.Model):
     fName = models.CharField(default = 'Mukesh', max_length=30)
     lName = models.CharField(default = 'Ambani', max_length=30)
-    email = models.CharField(default = 'patient@patient.com', max_length=50)
+    email = models.CharField(default = 'patient@patient.com', max_length=50, unique=True)
     age = models.CharField(default = '000', max_length=3)
     address = models.CharField(default = 'Antilla, Mumbai', max_length=500)
     currentStatus = models.CharField(default = 'Active', max_length=10)
@@ -17,7 +17,7 @@ class Patient(models.Model):
     medicalHistory = models.CharField(default = 'Diabetic', max_length=1200)
     ventilator = models.BooleanField()
     contactNo = models.CharField(default = '0000000000', max_length=15)
-    patientID = models.CharField(default = 'A1A1A1', max_length=12)
+    patientID = models.CharField(default = 'A1A1A1', max_length=12, unique=True)
     isAlive = models.BooleanField()
     operatedByDoctor = models.CharField(default = 'Vijay Raaz', max_length=60)
     def __str__(self):

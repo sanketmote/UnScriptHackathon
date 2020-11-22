@@ -10,8 +10,11 @@ urlpatterns = [
     path('addDoctor', views.addDoctor.as_view(), name="addDoctor"),
     path('addStaff', views.addStaff.as_view(), name="addStaff"),
     path('addReception', views.addReception.as_view(), name="addReception"),
-    path('ModifyPatient', views.ModifyPatient.as_view(), name="ModifyPatient"),
+    path('modifyPatient/<str:mail>', views.modifyPatient.as_view(), name="modifyPatient"),
     path('addHospital', views.addHospital.as_view(), name="addHospital"),
     path('InstanceStatus', views.InstanceStatus.as_view(), name="InstanceStatus"),
     path('Dashboard', views.Dashboard.as_view(), name="Dashboard"),
+    path('listPatients', views.listPatients.as_view(), name="listPatients"),
+    path('modifyHospital', views.modifyHospital.as_view(), name="modifyHospital"),
+    path('addHospital', views.addHospital.as_view(), name="addHospital"),
 ]
