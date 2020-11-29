@@ -1,0 +1,53 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Search Result {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+    <br>
+    <h6 class="card-category">
+            {% if errorMessage %}
+            <span class="text-danger">{{ errorMessage }}</span>
+            {% endif %}
+          </h6>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">ID</th>
+            <th scope="col">Operated By</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <th scope="row"><a href = "{% url 'mercuri:modifyPatient' i.email %}">{{i.fName}} {{i.lName}}</a></th>
+              {% if i.currentStatus == 'Active' %}
+              <td><span style="color: #fad60c;">{{i.currentStatus}}</span></td>
+              {% elif i.currentStatus == 'Dead' %}
+              <td><span style="color: #ff4141;">{{i.currentStatus}}</span></td>
+              {% elif i.currentStatus == 'Recovered' %}
+              <td><span style="color: #07ce00;">{{i.currentStatus}}</span></td>
+              {% endif %}
+              <td>{{i.patientID}}</td>
+              <td>{{i.operatedByDoctor}}</td>
+              <td>{{i.email}}</td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
